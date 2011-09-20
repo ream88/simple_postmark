@@ -1,7 +1,9 @@
 # encoding: utf-8
+require './lib/simple_postmark/version'
+
 Gem::Specification.new do |s|
   s.name        = 'simple_postmark'
-  s.version     = '0.1'
+  s.version     = SimplePostmark::VERSION
   s.platform    = Gem::Platform::RUBY
   s.author      = 'Mario Uher'
   s.email       = 'uher.mario@gmail.com'
