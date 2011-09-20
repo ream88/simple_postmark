@@ -1,14 +1,16 @@
 # simple_postmark
 
-SimplePostmark makes it easy to send mails via Postmark™ using Rails 3\'s ActionMailer.
+SimplePostmark makes it easy to send mails via Postmark™ using Rails 3's ActionMailer.
 SimplePostmark is inspired by [postmark-gem](https://github.com/wildbit/postmark-gem), but unfortunately postmark-gem forced to me to use non-standard Rails calls like `postmark_attachments`. SimplePostmark uses the standard Rails 3\'s ActionMailer syntax to send your emails via [Postmark](http://www.postmarkapp.com).
+
+---
 
 ### Installation
 
 In your `Gemfile`:
 
 ```ruby
-group :production
+group :production do
   gem 'simple_postmark'
 end
 ```
@@ -19,6 +21,7 @@ In your `config/environments/production.rb`:
 config.action_mailer.delivery_method = :simple_postmark
 config.action_mailer.simple_postmark_settings = { api_key: '********-****-****-****-************' }
 ```
+---
 
 ### Usage
 
@@ -48,6 +51,8 @@ class NotificationMailer < ActionMailer::Base
 end
 ```
 
+---
+
 ### Contributing to simple_postmark
  
 * Check out the latest master to make sure the feature hasn't been implemented or the bug hasn't been fixed yet
@@ -57,6 +62,8 @@ end
 * Commit and push until you are happy with your contribution
 * Make sure to add tests for it. This is important so I don't break it in a future version unintentionally.
 * Please try not to mess with the Rakefile, version, or history. If you want to have your own version, or is otherwise necessary, that is fine, but please isolate to its own commit so I can cherry-pick around it.
+
+---
 
 ### Copyright
 
