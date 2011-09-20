@@ -29,6 +29,10 @@ class NotificationMailer < ActionMailer::Base
   end
 end
 
+def merge_body(hash = {})
+  Hash[*body.merge(hash).sort.flatten(1)].to_json
+end
+
 describe ActionMailer::Base do
   let(:api_key) { [8, 4, 4, 4, 12].collect { |n| n.times.collect { (1..9).to_a.sample }.join }.join('-') }
   
@@ -69,19 +73,15 @@ describe ActionMailer::Base do
     end
     
     it 'should work' do
-      body = Hash[*self.body.sort.flatten].to_json
-      
       -> {
         NotificationMailer.im_your_bro.deliver
-      }.must_request(:post, 'http://api.postmarkapp.com/email', headers: headers, body: body)
+      }.must_request(:post, 'http://api.postmarkapp.com/email', headers: headers, body: merge_body)
     end
     
     it 'should allow tags' do
-      body = Hash[*self.body.merge('Tag' => 'simple-postmark').sort.flatten].to_json
-      
       -> {
         NotificationMailer.im_your_bro_tagged.deliver
-      }.must_request(:post, 'http://api.postmarkapp.com/email', headers: headers, body: body)
+      }.must_request(:post, 'http://api.postmarkapp.com/email', headers: headers, body: merge_body('Tag' => 'simple-postmark'))
     end
 
     it 'should work with attachments' do
@@ -90,23 +90,21 @@ describe ActionMailer::Base do
         'ContentType' => 'image/jpeg',
         'Name'        => 'thebrocode.jpg'
       }
-      body = Hash[*self.body.merge('Subject' => 'The Brocode!').sort.flatten].merge('Attachments' => [attachment]).to_json
       
       -> {
         NotificationMailer.the_bro_code.deliver
-      }.must_request(:post, 'http://api.postmarkapp.com/email', headers: headers, body: body)
+      }.must_request(:post, 'http://api.postmarkapp.com/email', headers: headers, body: merge_body('Subject' => 'The Brocode!', 'Attachments' => [attachment]))
     end
 
     it 'should work with multipart messages' do
-      body = {
+      bodies = {
         'HtmlBody' => "<p>Think of me like Yoda, but instead of being little and green I wear suits and I'm awesome.<br /><br />I'm your bro-I'm Broda!</p>",
         'TextBody' => "Think of me like Yoda, but instead of being little and green I wear suits and I'm awesome. I'm your bro-I'm Broda!"
       }
-      body = Hash[*self.body.merge(body).sort.flatten].to_json
       
       -> {
         NotificationMailer.im_your_bro_multipart.deliver
-      }.must_request(:post, 'http://api.postmarkapp.com/email', headers: headers, body: body)
+      }.must_request(:post, 'http://api.postmarkapp.com/email', headers: headers, body: merge_body(bodies))
     end
   end
 end

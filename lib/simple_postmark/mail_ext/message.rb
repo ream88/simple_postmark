@@ -9,12 +9,12 @@ module Mail
     end
 
     def to_postmark
-      {}.tap do |hash|
-        %w[bcc cc from html_body reply_to subject tag text_body to].each do |key|
-          value = send(key).presence or next
-          hash[key.camelcase] = value.respond_to?(:join) ? value.join(', ') : value.to_s
+      %w[attachments bcc cc from html_body reply_to subject tag text_body to].each.with_object({}) do |key, hash|        
+        hash[key.camelcase] = case (value = send(key).presence or next)
+          when AttachmentsList then value.map(&:to_postmark)
+          when Array then value.join(', ')
+          else value.to_s
         end
-        hash['Attachments'] = attachments.map(&:to_postmark) if has_attachments?
       end
     end
     
