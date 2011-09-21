@@ -1,8 +1,8 @@
 require 'active_support/core_ext/object/blank'
 require 'active_support/inflector/methods'
+require 'httparty'
 require 'json'
 require 'mail'
-require 'typhoeus'
 
 module SimplePostmark  
   require 'simple_postmark/mail_ext/message'

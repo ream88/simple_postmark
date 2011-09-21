@@ -14,9 +14,9 @@ Gem::Specification.new do |s|
   s.specification_version = 3
   
   s.add_dependency('activesupport', '~> 3.0.0')
+  s.add_dependency('httparty')
   s.add_dependency('json')
   s.add_dependency('mail')
-  s.add_dependency('typhoeus')
 
   s.add_development_dependency('growl')
   s.add_development_dependency('guard')

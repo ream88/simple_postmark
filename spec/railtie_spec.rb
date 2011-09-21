@@ -40,7 +40,6 @@ describe ActionMailer::Base do
     {
       'Accept'                  => 'application/json',
       'ContentType'             => 'application/json',
-      'User-Agent'              => 'Typhoeus - http://github.com/dbalatero/typhoeus/tree/master',
       'X-Postmark-Server-Token' => api_key
     }
   end

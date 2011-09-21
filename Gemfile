@@ -1,9 +1,9 @@
 source :rubygems
 
 gem 'activesupport', '~> 3.0.0'
+gem 'httparty'
 gem 'json'
 gem 'mail'
-gem 'typhoeus'
 
 group :development do
   gem 'actionmailer', '~> 3.0.0'
