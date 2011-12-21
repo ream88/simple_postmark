@@ -6,7 +6,7 @@ require 'simple_postmark/railtie'
 ActionMailer::Base.delivery_method = :simple_postmark
 
 class NotificationMailer < ActionMailer::Base
-  default from: 'barney.stinson@howimetyourmother.tld', to: 'ted.mosby@howimetyourmother.tld'
+  default from: 'barney@himym.tld', to: 'ted@himym.tld'
   
   def im_your_bro
     mail(subject: "I'm your bro!")
@@ -46,9 +46,9 @@ describe ActionMailer::Base do
       
   let(:body) do
     {
-      'From'    => 'barney.stinson@howimetyourmother.tld',
+      'From'    => 'barney@himym.tld',
       'Subject' => "I'm your bro!",
-      'To'      => 'ted.mosby@howimetyourmother.tld'
+      'To'      => 'ted@himym.tld'
     }
   end
   

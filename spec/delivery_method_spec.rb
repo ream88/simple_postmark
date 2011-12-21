@@ -11,8 +11,8 @@ describe Mail do
     describe :deliver! do
       let(:mail) do
         Mail.new do
-          from     'barney.stinson@howimetyourmother.tld'
-          to       'ted.mosby@howimetyourmother.tld'
+          from     'barney@himym.tld'
+          to       'ted@himym.tld'
           subject  "I'm your bro!"
           body     "Think of me like Yoda, but instead of being little and green I wear suits and I'm awesome. I'm your bro-I'm Broda!"
           tag      'simple-postmark'

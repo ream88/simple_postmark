@@ -30,7 +30,7 @@ Just use your standard Rails 3 Mailer:
 ```ruby
 class NotificationMailer < ActionMailer::Base
   def notification
-    mail(to: 'ted.mosby@howimetyourmother.tld', from: 'barney.stinson@howimetyourmother.tld', subject: "I'm your bro!") do
+    mail(to: 'ted@himym.tld', from: 'barney@himym.tld', subject: "I'm your bro!") do
       # ...
     end
   end
@@ -44,7 +44,7 @@ class NotificationMailer < ActionMailer::Base
   def notification
     attachments['thebrocode.pdf'] = File.read('thebrocode.pdf')
   
-    mail(to: 'ted.mosby@howimetyourmother.tld', from: 'barney.stinson@howimetyourmother.tld', subject: "I'm your bro!", tag: 'with-attachment') do
+    mail(to: 'ted@himym.tld', from: 'barney@himym.tld', subject: "I'm your bro!", tag: 'with-attachment') do
       # ...
     end
   end

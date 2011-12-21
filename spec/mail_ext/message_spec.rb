@@ -12,8 +12,8 @@ describe Mail::Message do
   describe :to_postmark do
     let(:mail) do
       Mail.new do
-        from     'barney.stinson@howimetyourmother.tld'
-        to       'ted.mosby@howimetyourmother.tld'
+        from     'barney@himym.tld'
+        to       'ted@himym.tld'
         subject  "I'm your bro!"
         body     "Think of me like Yoda, but instead of being little and green I wear suits and I'm awesome. I'm your bro-I'm Broda!"
         tag      'simple-postmark'
@@ -22,8 +22,8 @@ describe Mail::Message do
     
     it 'should return a hash' do
       hash = {
-        'From'        => 'barney.stinson@howimetyourmother.tld',
-        'To'          => 'ted.mosby@howimetyourmother.tld',
+        'From'        => 'barney@himym.tld',
+        'To'          => 'ted@himym.tld',
         'Subject'     => "I'm your bro!",
         'TextBody'    => "Think of me like Yoda, but instead of being little and green I wear suits and I'm awesome. I'm your bro-I'm Broda!",
         'Tag'         => 'simple-postmark',
@@ -39,25 +39,25 @@ describe Mail::Message do
     end
     
     it 'should return multiple recipients as comma-separated list' do
-      mail.to = ['barney.stinson@howimetyourmother.tld', 'marshall.eriksen@howimetyourmother.tld']
+      mail.to = ['barney@himym.tld', 'marshall@himym.tld']
       
-      mail.to_postmark['To'].must_equal('barney.stinson@howimetyourmother.tld, marshall.eriksen@howimetyourmother.tld')
+      mail.to_postmark['To'].must_equal('barney@himym.tld, marshall@himym.tld')
     end
     
     it 'should return all email headers as hash' do
-      mail.bcc = 'lily.aldrin@howimetyourmother.tld'
-      mail.cc = 'marshall.eriksen@howimetyourmother.tld'
-      mail.reply_to = 'barney.stinson@barneystinsonblog.com'
+      mail.bcc = 'lily@himym.tld'
+      mail.cc = 'marshall@himym.tld'
+      mail.reply_to = 'barney@barneystinsonblog.com'
       
       hash = {
-        'Bcc'      => 'lily.aldrin@howimetyourmother.tld',
-        'Cc'       => 'marshall.eriksen@howimetyourmother.tld',
-        'From'     => 'barney.stinson@howimetyourmother.tld',
-        'ReplyTo'  => 'barney.stinson@barneystinsonblog.com',
+        'Bcc'      => 'lily@himym.tld',
+        'Cc'       => 'marshall@himym.tld',
+        'From'     => 'barney@himym.tld',
+        'ReplyTo'  => 'barney@barneystinsonblog.com',
         'Subject'  => "I'm your bro!",
         'Tag'      => 'simple-postmark',
         'TextBody' => "Think of me like Yoda, but instead of being little and green I wear suits and I'm awesome. I'm your bro-I'm Broda!",
-        'To'       => 'ted.mosby@howimetyourmother.tld'
+        'To'       => 'ted@himym.tld'
       }
       
       mail.to_postmark.must_equal(hash)
