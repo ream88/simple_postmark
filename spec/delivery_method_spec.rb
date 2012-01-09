@@ -3,11 +3,11 @@ require File.expand_path('../spec_helper', __FILE__)
 describe Mail do
   describe SimplePostmark do
     let(:instance) { Mail::SimplePostmark.new({}) }
-    
+
     it 'should respond to deliver!' do
       instance.must_respond_to(:deliver!)
     end
-    
+
     describe :deliver! do
       let(:mail) do
         Mail.new do
@@ -19,22 +19,23 @@ describe Mail do
           add_file(File.join(File.dirname(__FILE__), 'thebrocode.jpg'))
         end
       end
-      
+      let(:url) { 'http://api.postmarkapp.com/email' }
+
       before do
         mail.delivery_method(Mail::SimplePostmark)
-        stub_request(:post, 'http://api.postmarkapp.com/email')
+        stub_request(:post, url)
       end
-      
+
       it 'should send emails' do
-        -> {
-          mail.deliver
-        }.must_request(:post, 'http://api.postmarkapp.com/email')
+        mail.deliver
+
+        assert_requested(:post, url)
       end
-      
+
       it 'should post appropriate data' do
-        -> {
-          mail.deliver
-        }.must_request(:post, 'http://api.postmarkapp.com/email', headers: { 'Accept' => 'application/json', 'ContentType' => 'application/json', 'X-Postmark-Server-Token' => '********-****-****-****-************' })
+        mail.deliver
+
+        assert_requested(:post, url, headers: { 'Accept' => 'application/json', 'ContentType' => 'application/json', 'X-Postmark-Server-Token' => '********-****-****-****-************' })
       end
     end
   end

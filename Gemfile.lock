@@ -49,6 +49,8 @@ GEM
     multi_json (1.0.4)
     multi_xml (0.4.1)
     polyglot (0.3.3)
+    purdytest (1.0.0)
+      minitest (~> 2.2)
     rack (1.3.6)
     rack-cache (1.1)
       rack (>= 0.4)
@@ -94,11 +96,11 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  actionmailer (>= 3.0.0)
-  activesupport (>= 3.0.0)
+  activesupport (~> 3.0)
   httparty
   json
   mail
   minitest
-  rails (>= 3.0.0)
+  purdytest
+  rails (~> 3.0)
   webmock
