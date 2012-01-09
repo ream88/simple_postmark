@@ -13,14 +13,14 @@ Gem::Specification.new do |s|
 
   s.specification_version = 3
 
-  s.add_dependency('activesupport', '~> 3.0.0')
+  s.add_dependency('activesupport', '~> 3.0')
   s.add_dependency('httparty')
   s.add_dependency('json')
   s.add_dependency('mail')
 
   s.add_development_dependency('minitest')
   s.add_development_dependency('purdytest')
-  s.add_development_dependency('rails', '~> 3.0.0')
+  s.add_development_dependency('rails', '~> 3.0')
   s.add_development_dependency('webmock')
 
   s.files        = Dir.glob('lib/**/*')
