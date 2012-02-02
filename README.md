@@ -5,7 +5,7 @@ SimplePostmark is inspired by [postmark-gem](https://github.com/wildbit/postmark
 
 [![Build Status](https://secure.travis-ci.org/haihappen/simple_postmark.png)](http://travis-ci.org/haihappen/simple_postmark)
 
-Tested against Rails versions `3.0.x`, `3.1.x`, `3.2.x`, `master` (upcoming Rails 4).
+Tested against Ruby version `1.9.2`, `1.9.3`, `ruby-head` and Rails versions `3.0.x`, `3.1.x`, `3.2.x`, `master` (upcoming Rails `4.0.0`).
 
 ## Installation
 
