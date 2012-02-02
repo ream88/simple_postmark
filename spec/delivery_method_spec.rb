@@ -4,9 +4,11 @@ describe Mail do
   describe SimplePostmark do
     let(:instance) { Mail::SimplePostmark.new({}) }
 
+
     it 'should respond to deliver!' do
       instance.must_respond_to(:deliver!)
     end
+
 
     describe :deliver! do
       let(:mail) do
@@ -26,11 +28,13 @@ describe Mail do
         stub_request(:post, url)
       end
 
+
       it 'should send emails' do
         mail.deliver
 
         assert_requested(:post, url)
       end
+
 
       it 'should post appropriate data' do
         mail.deliver

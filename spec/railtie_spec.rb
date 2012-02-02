@@ -35,7 +35,7 @@ end
 
 describe ActionMailer::Base do
   let(:url) { 'http://api.postmarkapp.com/email' }
-  let(:api_key) { [8, 4, 4, 4, 12].collect { |n| n.times.collect { (1..9).to_a.sample }.join }.join('-') }
+  let(:api_key) { [8, 4, 4, 4, 12].map { |n| n.times.collect { (1..9).to_a.sample }.join }.join('-') }
 
   let(:headers) do 
     {
@@ -57,9 +57,11 @@ describe ActionMailer::Base do
     stub_request(:post, url)
   end
 
+
   it 'should respond to +simple_postmark_settings+' do
     ActionMailer::Base.must_respond_to(:simple_postmark_settings)
   end
+
 
   it 'should allow setting an api key' do
     ActionMailer::Base.simple_postmark_settings = { api_key: api_key }
@@ -67,10 +69,12 @@ describe ActionMailer::Base do
     ActionMailer::Base.simple_postmark_settings[:api_key].must_equal(api_key)
   end
 
+
   describe 'sending mails' do
     before do
       ActionMailer::Base.simple_postmark_settings = { api_key: api_key }
     end
+
 
     it 'should work' do
       NotificationMailer.im_your_bro.deliver
@@ -78,11 +82,13 @@ describe ActionMailer::Base do
       assert_requested(:post, url, headers: headers, body: merge_body)
     end
 
+
     it 'should allow tags' do
       NotificationMailer.im_your_bro_tagged.deliver
       
       assert_requested(:post, url, headers: headers, body: merge_body('Tag' => 'simple-postmark'))
     end
+
 
     it 'should work with attachments' do
       attachment = {
@@ -96,6 +102,7 @@ describe ActionMailer::Base do
       assert_requested(:post, url, headers: headers, body: merge_body('Subject' => 'The Brocode!', 'Attachments' => [attachment]))
     end
 
+
     it 'should work with multipart messages' do
       bodies = {
         'HtmlBody' => "<p>Think of me like Yoda, but instead of being little and green I wear suits and I'm awesome.<br /><br />I'm your bro-I'm Broda!</p>",
@@ -103,7 +110,7 @@ describe ActionMailer::Base do
       }
       
       NotificationMailer.im_your_bro_multipart.deliver
-
+      
       assert_requested(:post, url, headers: headers, body: merge_body(bodies))
     end
   end
