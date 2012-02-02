@@ -18,8 +18,8 @@ class NotificationMailer < ActionMailer::Base
 
   def im_your_bro_multipart
     mail(subject: "I'm your bro!") do |as|
-      as.html { render(:text => "<p>Think of me like Yoda, but instead of being little and green I wear suits and I'm awesome.<br /><br />I'm your bro-I'm Broda!</p>" )}
-      as.text { render(:text => "Think of me like Yoda, but instead of being little and green I wear suits and I'm awesome. I'm your bro-I'm Broda!" )}
+      as.html { render(text: "<p>Think of me like Yoda, but instead of being little and green I wear suits and I'm awesome.<br /><br />I'm your bro-I'm Broda!</p>" )}
+      as.text { render(text: "Think of me like Yoda, but instead of being little and green I wear suits and I'm awesome. I'm your bro-I'm Broda!" )}
     end
   end
 
