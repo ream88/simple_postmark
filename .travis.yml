@@ -13,3 +13,8 @@ gemfile:
 branches:
   only:
     - master
+
+matrix:
+  exclude:
+    - rvm: 1.9.2
+      gemfile: gemfiles/Rails_master.gemfile
