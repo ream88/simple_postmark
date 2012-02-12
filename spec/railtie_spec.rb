@@ -35,9 +35,9 @@ end
 
 describe ActionMailer::Base do
   let(:url) { 'http://api.postmarkapp.com/email' }
-  let(:api_key) { [8, 4, 4, 4, 12].map { |n| n.times.collect { (1..9).to_a.sample }.join }.join('-') }
+  let(:api_key) { '********-****-****-****-************' }
 
-  let(:headers) do 
+  let(:headers) do
     {
       'Accept'                  => 'application/json',
       'ContentType'             => 'application/json',
