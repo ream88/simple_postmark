@@ -7,6 +7,8 @@ SimplePostmark is inspired by [postmark-gem](https://github.com/wildbit/postmark
 
 Tested against Ruby versions `1.9.2`, `1.9.3`, `ruby-head` and Rails versions `3.0.x`, `3.1.x`, `3.2.x`, `master` (upcoming Rails `4.0.0`).
 
+If you are still using Ruby `1.8.7` with Rails 3, you can use the backported version of this gem called [simple_postmark18](https://github.com/haihappen/simple_postmark/tree/ruby18).
+
 ## Installation
 
 In your `Gemfile`:
@@ -14,6 +16,8 @@ In your `Gemfile`:
 ```ruby
 group :production do
   gem 'simple_postmark'
+  # or on Ruby 1.8.7
+  # gem 'simple_postmark18'
 end
 ```
 
