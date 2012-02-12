@@ -2,7 +2,7 @@
 require './lib/simple_postmark/version'
 
 Gem::Specification.new do |s|
-  s.name         = 'simple_postmark'
+  s.name         = 'simple_postmark18'
   s.version      = SimplePostmark::VERSION
   s.author       = 'Mario Uher'
   s.email        = 'uher.mario@gmail.com'
