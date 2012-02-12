@@ -1,7 +1,9 @@
 rvm:
+  - 1.8.7
   - 1.9.2
   - 1.9.3
   - ruby-head
+  - ree
 
 gemfile:
   - Gemfile
@@ -16,5 +18,9 @@ branches:
 
 matrix:
   exclude:
+    - rvm: 1.8.7
+      gemfile: gemfiles/Rails_master.gemfile
+    - rvm: ree
+      gemfile: gemfiles/Rails_master.gemfile
     - rvm: 1.9.2
       gemfile: gemfiles/Rails_master.gemfile
