@@ -3,7 +3,7 @@ module Mail
     include HTTParty
 
     def initialize(values)
-      self.settings = { api_key: '********-****-****-****-************' }.merge(values)
+      self.settings = { :api_key => '********-****-****-****-************' }.merge(values)
     end
 
     attr_accessor :settings
@@ -13,7 +13,7 @@ module Mail
     def deliver!(mail)
       api_key = { 'X-Postmark-Server-Token' => settings[:api_key].to_s }
       
-      self.class.post('/email', headers: self.class.headers.merge(api_key), body: mail.to_postmark.to_json)
+      self.class.post('/email', :headers => self.class.headers.merge(api_key), :body => mail.to_postmark.to_json)
     end
   end
 end

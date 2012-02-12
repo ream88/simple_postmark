@@ -39,7 +39,7 @@ describe Mail do
       it 'should post appropriate data' do
         mail.deliver
 
-        assert_requested(:post, url, headers: { 'Accept' => 'application/json', 'ContentType' => 'application/json', 'X-Postmark-Server-Token' => '********-****-****-****-************' })
+        assert_requested(:post, url, :headers => { 'Accept' => 'application/json', 'ContentType' => 'application/json', 'X-Postmark-Server-Token' => '********-****-****-****-************' })
       end
     end
   end
