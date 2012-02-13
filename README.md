@@ -5,9 +5,9 @@ SimplePostmark is inspired by [postmark-gem](https://github.com/wildbit/postmark
 
 [![Build Status](https://secure.travis-ci.org/haihappen/simple_postmark.png)](http://travis-ci.org/haihappen/simple_postmark)
 
-Tested against Ruby versions `1.9.2`, `1.9.3`, `ruby-head` and Rails versions `3.0.x`, `3.1.x`, `3.2.x`, `master` (upcoming Rails `4.0.0`).
+This is the backported version of [simple_postmark](https://github.com/haihappen/simple_postmark) called `simple_postmark18`. It's tested against Ruby `1.8.7` and `Ruby Enterprise Edition` and Rails versions `3.0.x`, `3.1.x` and `3.2.x`.
 
-If you are still using Ruby `1.8.7` with Rails 3, you can use the backported version of this gem called [simple_postmark18](https://github.com/haihappen/simple_postmark/tree/ruby18).
+**WARNING**: Rails master (a.k.a Rails `4.0.0`) will discontinue supporting Ruby versions lower than `1.9.3`, so be sure to update your Ruby installation as soon as possible to Ruby `1.9.3`! `simple_postmark18` will not work with any Rails `4.0.0` app, so be sure to switch from `simple_postmark18` to simply `simple_postmark` (which will continue to support Rails `4.0.0`).
 
 ## Installation
 
@@ -15,9 +15,7 @@ In your `Gemfile`:
 
 ```ruby
 group :production do
-  gem 'simple_postmark'
-  # or on Ruby 1.8.7
-  # gem 'simple_postmark18'
+  gem 'simple_postmark18'
 end
 ```
 
@@ -25,7 +23,7 @@ In your `config/environments/production.rb`:
 
 ```ruby
 config.action_mailer.delivery_method = :simple_postmark
-config.action_mailer.simple_postmark_settings = { api_key: '********-****-****-****-************' }
+config.action_mailer.simple_postmark_settings = { :api_key => '********-****-****-****-************' }
 ```
 
 ## Usage
@@ -35,7 +33,7 @@ Just use your standard Rails 3 Mailer:
 ```ruby
 class NotificationMailer < ActionMailer::Base
   def notification
-    mail(to: 'ted@himym.tld', from: 'barney@himym.tld', subject: "I'm your bro!") do
+    mail(:to => 'ted@himym.tld', :from => 'barney@himym.tld', :subject => "I'm your bro!") do
       # ...
     end
   end
@@ -49,7 +47,7 @@ class NotificationMailer < ActionMailer::Base
   def notification
     attachments['thebrocode.pdf'] = File.read('thebrocode.pdf')
   
-    mail(to: 'ted@himym.tld', from: 'barney@himym.tld', subject: "I'm your bro!", tag: 'with-attachment') do
+    mail(:to => 'ted@himym.tld', :from => 'barney@himym.tld', :subject => "I'm your bro!", :tag => 'with-attachment') do
       # ...
     end
   end
