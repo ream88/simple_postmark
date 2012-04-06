@@ -1,25 +1,22 @@
-# encoding: utf-8
-require './lib/simple_postmark/version'
+Gem::Specification.new do |gem|
+  gem.name          = 'simple_postmark'
+  gem.version       = '0.4.0'
+  gem.authors       = 'Mario Uher'
+  gem.email         = 'uher.mario@gmail.com'
+  gem.description   = 'SimplePostmark makes it easy to send mails via Postmark™ using Rails 3\'s ActionMailer.'
+  gem.summary       = 'A simple way to use Postmark™ with your Rails app.'
+  gem.homepage      = 'http://haihappen.github.com/simple_postmark'
 
-Gem::Specification.new do |s|
-  s.name         = 'simple_postmark'
-  s.version      = SimplePostmark::VERSION
-  s.author       = 'Mario Uher'
-  s.email        = 'uher.mario@gmail.com'
-  s.homepage     = 'https://www.github.com/haihappen/simple_postmark'
-  s.summary      = 'A simple way to use Postmark™ with your Rails app.'
-  s.description  = 'SimplePostmark makes it easy to send mails via Postmark™ using Rails 3\'s ActionMailer.'
+  gem.files         = `git ls-files`.split("\n")
+  gem.require_path  = 'lib'
 
-  s.files        = Dir.glob('lib/**/*')
-  s.require_path = 'lib'
+  gem.add_dependency 'activesupport', '~> 3.0'
+  gem.add_dependency 'httparty'
+  gem.add_dependency 'json'
+  gem.add_dependency 'mail'
 
-  s.add_dependency('activesupport', '~> 3.0')
-  s.add_dependency('httparty')
-  s.add_dependency('json')
-  s.add_dependency('mail')
-
-  s.add_development_dependency('minitest')
-  s.add_development_dependency('purdytest')
-  s.add_development_dependency('rails', '~> 3.0')
-  s.add_development_dependency('webmock')
+  gem.add_development_dependency 'minitest'
+  gem.add_development_dependency 'purdytest'
+  gem.add_development_dependency 'rails', '~> 3.0'
+  gem.add_development_dependency 'webmock'
 end
