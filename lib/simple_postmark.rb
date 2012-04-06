@@ -4,7 +4,7 @@ require 'httparty'
 require 'json'
 require 'mail'
 
-module SimplePostmark  
+module SimplePostmark
   require 'simple_postmark/mail_ext/message'
   require 'simple_postmark/mail_ext/part'
 
