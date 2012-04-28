@@ -1,9 +1,7 @@
-# simple_postmark
+# simple_postmark [![Build Status](https://secure.travis-ci.org/haihappen/simple_postmark.png)](http://travis-ci.org/haihappen/simple_postmark)
 
 SimplePostmark makes it easy to send mails via [Postmark](http://postmarkapp.com)™ using Rails 3's ActionMailer.
 SimplePostmark is inspired by [postmark-gem](https://github.com/wildbit/postmark-gem), but unfortunately postmark-gem forced to me to use non-standard Rails calls like `postmark_attachments`. SimplePostmark uses the standard Rails 3's ActionMailer syntax to send your emails via Postmark.
-
-[![Build Status](https://secure.travis-ci.org/haihappen/simple_postmark.png)](http://travis-ci.org/haihappen/simple_postmark)
 
 This is the backported version of [simple_postmark](https://github.com/haihappen/simple_postmark) called `simple_postmark18`. It's tested against Ruby `1.8.7` and `Ruby Enterprise Edition` and Rails versions `3.0.x`, `3.1.x` and `3.2.x`.
 
@@ -38,7 +36,7 @@ class NotificationMailer < ActionMailer::Base
     end
   end
 end
-```
+`
 
 And of course you can use standard attachment calls and [Postmark's tags](http://developer.postmarkapp.com/developer-build.html#message-format):
 
@@ -54,15 +52,13 @@ class NotificationMailer < ActionMailer::Base
 end
 ```
 
-## Contributing to simple_postmark
- 
-* Check out the latest master to make sure the feature hasn't been implemented or the bug hasn't been fixed yet
-* Check out the [issue tracker](https://github.com/haihappen/simple_postmark/issues) to make sure someone already hasn't requested it and/or contributed it
-* Fork the project
-* Start a feature/bugfix branch
-* Commit and push until you are happy with your contribution
-* Make sure to add tests for it. This is important so I don't break it in a future version unintentionally.
-* Please try not to mess with the Rakefile, version, or history. If you want to have your own version, or is otherwise necessary, that is fine, but please isolate to its own commit so I can cherry-pick around it.
+## Contributing
+
+1. Fork it
+2. Create your feature branch (`git checkout -b my-new-feature`)
+3. Commit your changes (`git commit -am 'Added some feature'`)
+4. Push to the branch (`git push origin my-new-feature`)
+5. Create new Pull Request
 
 ## Copyright
 

@@ -9,6 +9,7 @@ module SimplePostmark
   require 'simple_postmark/mail_ext/part'
 
   require 'simple_postmark/delivery_method'
+  require 'simple_postmark/api_error'
 
   require 'simple_postmark/railtie' if defined?(Rails)
 end
