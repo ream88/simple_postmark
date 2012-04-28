@@ -53,17 +53,18 @@ describe ActionMailer::Base do
     }
   end
 
+
   before do
     stub_request(:post, url)
   end
 
 
-  it 'should respond to +simple_postmark_settings+' do
+  it 'responds to +simple_postmark_settings+' do
     ActionMailer::Base.must_respond_to(:simple_postmark_settings)
   end
 
 
-  it 'should allow setting an api key' do
+  it 'allows setting an api key' do
     ActionMailer::Base.simple_postmark_settings = { api_key: api_key }
     
     ActionMailer::Base.simple_postmark_settings[:api_key].must_equal(api_key)
@@ -76,21 +77,21 @@ describe ActionMailer::Base do
     end
 
 
-    it 'should work' do
+    it 'works' do
       NotificationMailer.im_your_bro.deliver
       
       assert_requested(:post, url, headers: headers, body: merge_body)
     end
 
 
-    it 'should allow tags' do
+    it 'allows tags' do
       NotificationMailer.im_your_bro_tagged.deliver
       
       assert_requested(:post, url, headers: headers, body: merge_body('Tag' => 'simple-postmark'))
     end
 
 
-    it 'should work with attachments' do
+    it 'works with attachments' do
       attachment = {
         'Content'     => [File.read(File.join(File.dirname(__FILE__), 'thebrocode.jpg'))].pack('m'),
         'ContentType' => 'image/jpeg',
@@ -103,7 +104,7 @@ describe ActionMailer::Base do
     end
 
 
-    it 'should work with multipart messages' do
+    it 'works with multipart messages' do
       bodies = {
         'HtmlBody' => "<p>Think of me like Yoda, but instead of being little and green I wear suits and I'm awesome.<br /><br />I'm your bro-I'm Broda!</p>",
         'TextBody' => "Think of me like Yoda, but instead of being little and green I wear suits and I'm awesome. I'm your bro-I'm Broda!"

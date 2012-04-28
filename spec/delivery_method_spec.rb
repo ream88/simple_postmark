@@ -5,7 +5,7 @@ describe Mail do
     let(:instance) { Mail::SimplePostmark.new({}) }
 
 
-    it 'should respond to deliver!' do
+    it 'responds to deliver!' do
       instance.must_respond_to(:deliver!)
     end
 
@@ -23,22 +23,23 @@ describe Mail do
       end
       let(:url) { 'http://api.postmarkapp.com/email' }
 
+
       before do
         mail.delivery_method(Mail::SimplePostmark)
         stub_request(:post, url)
       end
 
 
-      it 'should send emails' do
+      it 'sends emails' do
         mail.deliver
-
+        
         assert_requested(:post, url)
       end
 
 
-      it 'should post appropriate data' do
+      it 'posts appropriate data' do
         mail.deliver
-
+        
         assert_requested(:post, url, headers: { 'Accept' => 'application/json', 'ContentType' => 'application/json', 'X-Postmark-Server-Token' => '********-****-****-****-************' })
       end
     end
