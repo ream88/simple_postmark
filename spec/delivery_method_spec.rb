@@ -37,7 +37,7 @@ describe Mail do
       end
 
 
-      it 'posts appropriate data' do
+      it 'sends appropriate headers' do
         mail.deliver
         
         assert_requested(:post, url, headers: { 'Accept' => 'application/json', 'ContentType' => 'application/json', 'X-Postmark-Server-Token' => '********-****-****-****-************' })

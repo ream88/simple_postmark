@@ -37,7 +37,7 @@ describe Mail::Part do
       part = Mail::Part.new.tap do |mail|
         mail.add_file(file)
       end.attachments.first
-        
+      
       content = [File.read(file)].pack('m')
       
       part.to_postmark.must_equal('Name' => 'thebrocode.jpg', 'Content' => content, 'ContentType' => 'image/jpeg')
