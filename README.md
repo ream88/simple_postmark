@@ -36,7 +36,7 @@ class NotificationMailer < ActionMailer::Base
     end
   end
 end
-`
+```
 
 And of course you can use standard attachment calls and [Postmark's tags](http://developer.postmarkapp.com/developer-build.html#message-format):
 
