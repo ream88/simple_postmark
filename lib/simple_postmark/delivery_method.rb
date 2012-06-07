@@ -12,9 +12,10 @@ module Mail
 
     def deliver!(mail)
       api_key = { 'X-Postmark-Server-Token' => settings[:api_key].to_s }
-      
+
       response = self.class.post('/email', headers: self.class.headers.merge(api_key), body: mail.to_postmark.to_json)
       raise ::SimplePostmark::APIError.new(response) unless response.success?
+      response
     end
   end
 end
