@@ -41,7 +41,7 @@ end
 
 describe 'SimplePostmark integration' do
   before do
-    ActionMailer::Base.simple_postmark_settings = { api_key: ENV['SIMPLE_POSTMARK_API_KEY'] }
+    ActionMailer::Base.simple_postmark_settings = { api_key: ENV['SIMPLE_POSTMARK_API_KEY'], return_response: true }
     ActionMailer::Base.raise_delivery_errors = true
   end
 
@@ -63,5 +63,39 @@ describe 'SimplePostmark integration' do
 
   it 'sends emails with reply-to' do
     IntegrationMailer.email_with_reply_to.deliver
+  end
+
+
+  describe 'wrong mail settings' do
+    before do
+      ActionMailer::Base.simple_postmark_settings = { api_key: '********-****-****-****-************' }
+    end
+
+
+    it 'is silent if raise_delivery_errors is not set' do
+      ActionMailer::Base.raise_delivery_errors = false
+      
+      IntegrationMailer.email.deliver
+    end
+
+
+    it 'raises a SimplePostmark::APIError containing the error from postmarkapp.com if raise_delivery_errors is set' do
+      -> { IntegrationMailer.email.deliver }.must_raise(SimplePostmark::APIError)
+    end
+  end
+
+
+  describe 'setting return_response option' do
+    before do
+      ActionMailer::Base.simple_postmark_settings = { api_key: ENV['SIMPLE_POSTMARK_API_KEY'], return_response: true }
+    end
+
+
+    it 'returns the response from postmarkapp.com' do
+      response = IntegrationMailer.email.deliver!.parsed_response
+      
+      response['To'].must_equal(ENV['SIMPLE_POSTMARK_TO'])
+      response['Message'].must_equal('OK')
+    end
   end
 end if ENV['SIMPLE_POSTMARK_INTEGRATION_SPEC']
