@@ -8,7 +8,6 @@ gem 'mail'
 
 group :development do
   gem 'minitest'
-  gem 'purdytest'
   gem 'rails', github: 'rails/rails'
   gem 'webmock'
 end
