@@ -44,13 +44,23 @@ And of course you can use standard attachment calls and [Postmark's tags](http:/
 class NotificationMailer < ActionMailer::Base
   def notification
     attachments['thebrocode.pdf'] = File.read('thebrocode.pdf')
-  
+
     mail(:to => 'ted@himym.tld', :from => 'barney@himym.tld', :subject => "I'm your bro!", :tag => 'with-attachment') do
       # ...
     end
   end
 end
 ```
+
+## Advanced Configuration
+
+* `api_key`: Your Postmark API key. Go to [your Rack](https://postmarkapp.com/servers),
+selected the one you want to use and then go to the **Credentials** tab to find your API key.
+
+* `return_response`: In order to receive the response from the Postmark API
+– for example, if you want to store the error code or the message id -
+set it to `true`. ([Mail](https://github.com/mikel/mail) which is the base of simple_postmark
+expects this option.)
 
 ## Contributing
 
@@ -84,3 +94,4 @@ NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
 LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
 OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
