@@ -58,9 +58,24 @@ end
 selected the one you want to use and then go to the **Credentials** tab to find your API key.
 
 * `return_response`: In order to receive the response from the Postmark API
-– for example, if you want to store the error code or the message id -
+– for example, if you want to store ErrorCode or MessageID -
 set it to `true`. ([Mail](https://github.com/mikel/mail) which is the base of simple_postmark
 expects this option.)
+
+Example how the ErrorCode, MessageID and other values can be received from Postmark:
+
+```ruby
+# config/environments/production.rb
+config.action_mailer.simple_postmark_settings = { api_key: '********-****-****-****-************', return_response: true }
+
+# your_mailer.rb
+response = YourMailer.email.deliver!.parsed_response
+
+response['MessageID']
+  # => "b7bc2f4a-e38e-4336-af7d-e6c392c2f817"
+response['ErrorCode']
+  # => 0
+```
 
 ## Contributing
 
