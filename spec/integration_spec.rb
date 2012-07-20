@@ -96,6 +96,7 @@ describe 'SimplePostmark integration' do
       
       response['To'].must_equal(ENV['SIMPLE_POSTMARK_TO'])
       response['Message'].must_equal('OK')
+      response['MessageID'].wont_be_empty
     end
   end
 end if ENV['SIMPLE_POSTMARK_INTEGRATION_SPEC']
