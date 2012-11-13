@@ -1,46 +1,62 @@
 require File.expand_path('../../spec_helper', __FILE__)
 
 describe Mail::Part do
-  it 'responds to +to_postmark+' do
-    Mail::Part.new.must_respond_to(:to_postmark)
+  describe 'integration into Mail::Part' do
+    subject { Mail::Part.new }
+
+
+    it 'responds to +to_postmark+' do
+      subject.new.must_respond_to(:to_postmark)
+    end
   end
 
 
   describe :to_postmark do
-    it 'returns body hash if part is not an attachment' do
-      part = Mail::Part.new do
-        body         "Think of me like Yoda, but instead of being little and green I wear suits and I'm awesome. I'm your bro-I'm Broda!"
-        content_type 'text/plain'
+    describe 'a text/plain part' do
+      let(:content) { "Think of me like Yoda, but instead of being little and green I wear suits and I'm awesome. I'm your bro-I'm Broda!" }
+      subject do
+        Mail::Part.new do
+          body         content
+          content_type 'text/plain'
+        end
       end
-      
-      content = "Think of me like Yoda, but instead of being little and green I wear suits and I'm awesome. I'm your bro-I'm Broda!"
-      
-      part.to_postmark.must_equal('Name' => nil, 'Content' => content, 'ContentType' => 'text/plain')
+
+
+      it 'returns body hash' do
+        part.to_postmark.must_equal('Name' => nil, 'Content' => content, 'ContentType' => 'text/plain')
+      end
     end
 
 
-    it 'returns body hash if part is not an attachment' do
-      part = Mail::Part.new do
-        body         "<p>Think of me like Yoda, but instead of being little and green I wear suits and I'm awesome.<br /><br />I'm your bro-I'm Broda!</p>"
-        content_type 'text/html'
+    describe 'a text/html part' do
+      let(:content) { "<p>Think of me like Yoda, but instead of being little and green I wear suits and I'm awesome.<br /><br />I'm your bro-I'm Broda!</p>" }
+      subject do
+        Mail::Part.new do
+          body         content
+          content_type 'text/html'
+        end
       end
-      
-      content = "<p>Think of me like Yoda, but instead of being little and green I wear suits and I'm awesome.<br /><br />I'm your bro-I'm Broda!</p>"
-      
-      part.to_postmark.must_equal('Name' => nil, 'Content' => content, 'ContentType' => 'text/html')
+
+
+      it 'returns body hash' do
+        part.to_postmark.must_equal('Name' => nil, 'Content' => content, 'ContentType' => 'text/html')
+      end
     end
 
 
-    it 'returns base64-encoded file-content hash if part is an attachment' do
-      file = File.join(File.dirname(__FILE__), '..', 'thebrocode.jpg')
-      
-      part = Mail::Part.new.tap do |mail|
-        mail.add_file(file)
-      end.attachments.first
-      
-      content = [File.read(file)].pack('m')
-      
-      part.to_postmark.must_equal('Name' => 'thebrocode.jpg', 'Content' => content, 'ContentType' => 'image/jpeg')
+    describe 'a file part' do
+      let(:file) { File.join(File.dirname(__FILE__), '..', 'thebrocode.jpg') }
+      let(:content) { [File.read(file)].pack('m') }
+      subject do
+        Mail::Part.new.tap do |mail|
+          mail.add_file(file)
+        end.attachments.first
+      end
+
+
+      it 'returns base64-encoded file-content hash if part is an attachment' do
+        part.to_postmark.must_equal('Name' => 'thebrocode.jpg', 'Content' => content, 'ContentType' => 'image/jpeg')
+      end
     end
   end
 end

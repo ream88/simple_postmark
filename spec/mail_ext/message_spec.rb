@@ -1,18 +1,28 @@
 require File.expand_path('../../spec_helper', __FILE__)
 
 describe Mail::Message do
-  it 'responds to +to_postmark+' do
-    Mail::Message.new.must_respond_to(:to_postmark)
+  describe 'integration into Mail::Message' do
+    subject { Mail::Message.new }
+
+
+    it 'responds to +to_postmark+' do
+      subject.must_respond_to(:to_postmark)
+    end
   end
 
 
-  it 'responds to +to_postmark+' do
-    Mail.new.must_respond_to(:to_postmark)
+  describe 'integration into Mail' do
+    subject { Mail.new }
+
+
+    it 'responds to +to_postmark+' do
+      subject.must_respond_to(:to_postmark)
+    end
   end
 
 
   describe :to_postmark do
-    let(:mail) do
+    subject do
       Mail.new do
         from     'barney@himym.tld'
         to       'ted@himym.tld'
@@ -36,23 +46,23 @@ describe Mail::Message do
           'ContentType' => 'image/jpeg'
         }]
       }
-      mail.add_file(File.join(File.dirname(__FILE__), '..', 'thebrocode.jpg'))
+      subject.add_file(File.join(File.dirname(__FILE__), '..', 'thebrocode.jpg'))
       
-      mail.to_postmark.must_equal(hash)
+      subject.to_postmark.must_equal(hash)
     end
 
 
     it 'returns multiple recipients as comma-separated list' do
-      mail.to = ['barney@himym.tld', 'marshall@himym.tld']
+      subject.to = ['barney@himym.tld', 'marshall@himym.tld']
       
-      mail.to_postmark['To'].must_equal('barney@himym.tld, marshall@himym.tld')
+      subject.to_postmark['To'].must_equal('barney@himym.tld, marshall@himym.tld')
     end
 
 
     it 'returns all email headers as hash' do
-      mail.bcc = 'lily@himym.tld'
-      mail.cc = 'marshall@himym.tld'
-      mail.reply_to = 'barney@barneystinsonblog.com'
+      subject.bcc = 'lily@himym.tld'
+      subject.cc = 'marshall@himym.tld'
+      subject.reply_to = 'barney@barneystinsonblog.com'
       
       hash = {
         'Bcc'      => 'lily@himym.tld',
@@ -64,17 +74,18 @@ describe Mail::Message do
         'TextBody' => "Think of me like Yoda, but instead of being little and green I wear suits and I'm awesome. I'm your bro-I'm Broda!",
         'To'       => 'ted@himym.tld'
       }
-
-      mail.to_postmark.must_equal(hash)
+      
+      subject.to_postmark.must_equal(hash)
     end
 
-    it 'should use the from and reply-to names as well as the email addresses' do
-      mail.to = 'Lily <lily@himym.tld>'
-      mail.from = 'Marshall <marshall@himym.tld>'
-      mail.reply_to = 'Barney <barney@barneystinsonblog.com>'
-      mail.bcc = 'lily@himym.tld'
-      mail.cc = 'marshall@himym.tld'
 
+    it 'should use the from and reply-to names as well as the email addresses' do
+      subject.to = 'Lily <lily@himym.tld>'
+      subject.from = 'Marshall <marshall@himym.tld>'
+      subject.reply_to = 'Barney <barney@barneystinsonblog.com>'
+      subject.bcc = 'lily@himym.tld'
+      subject.cc = 'marshall@himym.tld'
+      
       hash = {
         'To'       => 'Lily <lily@himym.tld>',
         'From'     => 'Marshall <marshall@himym.tld>',
@@ -85,8 +96,8 @@ describe Mail::Message do
         'Tag'      => 'simple-postmark',
         'TextBody' => "Think of me like Yoda, but instead of being little and green I wear suits and I'm awesome. I'm your bro-I'm Broda!",
       }
-
-      mail.to_postmark.must_equal(hash)
+      
+      subject.to_postmark.must_equal(hash)
     end
   end
 end
