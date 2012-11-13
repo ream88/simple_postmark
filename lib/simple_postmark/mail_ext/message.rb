@@ -22,7 +22,10 @@ module Mail
 
     def to_postmark
       %w[attachments bcc cc from html_body reply_to subject tag text_body to].each.with_object({}) do |key, hash|
-        hash[key.camelcase] = case (value = public_send(key).presence or next)
+        # mail returns different responses for mail[:reply_to] than mail.reply_to, and we want to prefer the former
+        # as it includes the name, not just the email
+        key_value = self[key.to_sym].nil? ? public_send(key) : self[key.to_sym]
+        hash[key.camelcase] = case (value = key_value.presence or next)
           when AttachmentsList then value.map(&:to_postmark)
           when Array then value.join(', ')
           else value.to_s
