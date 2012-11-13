@@ -64,7 +64,28 @@ describe Mail::Message do
         'TextBody' => "Think of me like Yoda, but instead of being little and green I wear suits and I'm awesome. I'm your bro-I'm Broda!",
         'To'       => 'ted@himym.tld'
       }
-      
+
+      mail.to_postmark.must_equal(hash)
+    end
+
+    it 'should use the from and reply-to names as well as the email addresses' do
+      mail.to = 'Lily <lily@himym.tld>'
+      mail.from = 'Marshall <marshall@himym.tld>'
+      mail.reply_to = 'Barney <barney@barneystinsonblog.com>'
+      mail.bcc = 'lily@himym.tld'
+      mail.cc = 'marshall@himym.tld'
+
+      hash = {
+        'To'       => 'Lily <lily@himym.tld>',
+        'From'     => 'Marshall <marshall@himym.tld>',
+        'ReplyTo'  => 'Barney <barney@barneystinsonblog.com>',
+        'Bcc'      => 'lily@himym.tld',
+        'Cc'       => 'marshall@himym.tld',
+        'Subject'  => "I'm your bro!",
+        'Tag'      => 'simple-postmark',
+        'TextBody' => "Think of me like Yoda, but instead of being little and green I wear suits and I'm awesome. I'm your bro-I'm Broda!",
+      }
+
       mail.to_postmark.must_equal(hash)
     end
   end
