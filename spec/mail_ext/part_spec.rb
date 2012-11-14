@@ -1,12 +1,12 @@
 require File.expand_path('../../spec_helper', __FILE__)
 
-describe Mail::Part do
+describe 'Mail::Part' do
   describe 'integration into Mail::Part' do
     subject { Mail::Part.new }
 
 
     it 'responds to +to_postmark+' do
-      subject.new.must_respond_to(:to_postmark)
+      subject.must_respond_to(:to_postmark)
     end
   end
 
@@ -15,15 +15,15 @@ describe Mail::Part do
     describe 'a text/plain part' do
       let(:content) { "Think of me like Yoda, but instead of being little and green I wear suits and I'm awesome. I'm your bro-I'm Broda!" }
       subject do
-        Mail::Part.new do
-          body         content
-          content_type 'text/plain'
+        Mail::Part.new.tap do |mail|
+          mail.body = content
+          mail.content_type = 'text/plain'
         end
       end
 
 
       it 'returns body hash' do
-        part.to_postmark.must_equal('Name' => nil, 'Content' => content, 'ContentType' => 'text/plain')
+        subject.to_postmark.must_equal('Name' => nil, 'Content' => content, 'ContentType' => 'text/plain')
       end
     end
 
@@ -31,15 +31,15 @@ describe Mail::Part do
     describe 'a text/html part' do
       let(:content) { "<p>Think of me like Yoda, but instead of being little and green I wear suits and I'm awesome.<br /><br />I'm your bro-I'm Broda!</p>" }
       subject do
-        Mail::Part.new do
-          body         content
-          content_type 'text/html'
+        Mail::Part.new.tap do |mail|
+          mail.body = content
+          mail.content_type = 'text/html'
         end
       end
 
 
       it 'returns body hash' do
-        part.to_postmark.must_equal('Name' => nil, 'Content' => content, 'ContentType' => 'text/html')
+        subject.to_postmark.must_equal('Name' => nil, 'Content' => content, 'ContentType' => 'text/html')
       end
     end
 
@@ -55,7 +55,7 @@ describe Mail::Part do
 
 
       it 'returns base64-encoded file-content hash if part is an attachment' do
-        part.to_postmark.must_equal('Name' => 'thebrocode.jpg', 'Content' => content, 'ContentType' => 'image/jpeg')
+        subject.to_postmark.must_equal('Name' => 'thebrocode.jpg', 'Content' => content, 'ContentType' => 'image/jpeg')
       end
     end
   end

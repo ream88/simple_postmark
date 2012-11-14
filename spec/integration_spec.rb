@@ -6,7 +6,7 @@ require 'simple_postmark/railtie'
 WebMock.allow_net_connect!
 
 class IntegrationMailer < ActionMailer::Base
-  default to: ENV['SIMPLE_POSTMARK_TO'], from: ENV['SIMPLE_POSTMARK_FROM']
+  default from: 'barney@himym.tld', to: 'ted@himym.tld'
 
   def text
     'Mail send via Postmark using SimplePostmark'
@@ -33,7 +33,7 @@ class IntegrationMailer < ActionMailer::Base
   end
 
   def email_with_reply_to
-    mail(subject: 'SimplePostmark with Reply To', reply_to: ENV['SIMPLE_POSTMARK_REPLY_TO']) do |as|
+    mail(subject: 'SimplePostmark with Reply To', reply_to: 'barney@barneystinsonblog.com') do |as|
       as.text { render(text: text) }
     end
   end
@@ -41,7 +41,7 @@ end
 
 describe 'SimplePostmark integration' do
   before do
-    ActionMailer::Base.simple_postmark_settings = { api_key: ENV['SIMPLE_POSTMARK_API_KEY'], return_response: true }
+    ActionMailer::Base.simple_postmark_settings = { api_key: 'POSTMARK_API_TEST', return_response: true }
     ActionMailer::Base.raise_delivery_errors = true
   end
 
@@ -87,15 +87,15 @@ describe 'SimplePostmark integration' do
 
   describe 'setting return_response option' do
     before do
-      ActionMailer::Base.simple_postmark_settings = { api_key: ENV['SIMPLE_POSTMARK_API_KEY'], return_response: true }
+      ActionMailer::Base.simple_postmark_settings = { api_key: 'POSTMARK_API_TEST', return_response: true }
     end
 
 
     it 'returns the response from postmarkapp.com' do
       response = IntegrationMailer.email.deliver!.parsed_response
       
-      response['To'].must_equal(ENV['SIMPLE_POSTMARK_TO'])
-      response['Message'].must_equal('OK')
+      response['To'].must_equal('ted@himym.tld')
+      response['Message'].must_equal('Test job accepted')
       response['MessageID'].wont_be_empty
     end
   end
