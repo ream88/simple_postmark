@@ -85,7 +85,7 @@ Testing simple_postmark is, well, simple. ;)
 ```ruby
 # config/environments/test.rb
 config.action_mailer.simple_postmark_settings = { api_key: 'POSTMARK_API_TEST', return_response: true }
-``
+```
 
 With this setup, it will actually trigger an API connection to Postmark, but Postmark will never send any emails, and none will be delivered to your recipients.
 
