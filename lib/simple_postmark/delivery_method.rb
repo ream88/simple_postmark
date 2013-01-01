@@ -1,21 +1,23 @@
 module Mail
-  class SimplePostmark
+  class SimplePostmark < Struct.new(:settings)
     include HTTParty
 
-    def initialize(values)
-      self.settings = { api_key: '********-****-****-****-************' }.merge(values)
-    end
-
-    attr_accessor :settings
     base_uri 'http://api.postmarkapp.com'
     headers 'Accept' => 'application/json', 'ContentType' => 'application/json'
 
     def deliver!(mail)
-      api_key = { 'X-Postmark-Server-Token' => settings[:api_key].to_s }
-
-      response = self.class.post('/email', headers: self.class.headers.merge(api_key), body: mail.to_postmark.to_json)
+      response = self.class.post('/email', headers: headers, body: get_body(mail))
       raise ::SimplePostmark::APIError.new(response) unless response.success?
       response
+    end
+
+  private
+    def headers
+      self.class.headers.merge('X-Postmark-Server-Token' => settings[:api_key].to_s)
+    end
+
+    def get_body(mail)
+      mail.to_postmark.to_json
     end
   end
 end

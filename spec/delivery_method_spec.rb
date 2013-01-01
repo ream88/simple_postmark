@@ -2,7 +2,7 @@ require_relative 'spec_helper'
 
 describe Mail do
   describe SimplePostmark do
-    let(:instance) { Mail::SimplePostmark.new({}) }
+    let(:instance) { Mail::SimplePostmark.new }
 
 
     it 'responds to deliver!' do
@@ -27,20 +27,17 @@ describe Mail do
       before do
         mail.delivery_method(Mail::SimplePostmark)
         stub_request(:post, url)
+        mail.deliver
       end
 
 
       it 'sends emails' do
-        mail.deliver
-        
         assert_requested(:post, url)
       end
 
 
       it 'sends appropriate headers' do
-        mail.deliver
-        
-        assert_requested(:post, url, headers: { 'Accept' => 'application/json', 'ContentType' => 'application/json', 'X-Postmark-Server-Token' => '********-****-****-****-************' })
+        assert_requested(:post, url, headers: { 'Accept' => 'application/json', 'ContentType' => 'application/json', 'X-Postmark-Server-Token' => '' })
       end
     end
   end
