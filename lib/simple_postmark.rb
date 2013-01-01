@@ -1,5 +1,4 @@
-require 'active_support/core_ext/object/blank'
-require 'active_support/inflector/methods'
+require 'active_support'
 require 'httparty'
 require 'json'
 require 'mail'
