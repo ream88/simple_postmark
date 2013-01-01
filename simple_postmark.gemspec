@@ -1,4 +1,5 @@
-require './lib/simple_postmark/version'
+$: << File.expand_path('../lib', __FILE__)
+require 'simple_postmark/version'
 
 Gem::Specification.new do |gem|
   gem.name          = 'simple_postmark'
