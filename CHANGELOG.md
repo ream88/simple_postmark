@@ -1,3 +1,7 @@
+## 0.5.1 (December 21, 2012)
+
+* Prepared for gem-release.
+
 ## 0.5.0 (November 14, 2012)
 
 * Updated/fixed specs to work with Postmark's POSTMARK_API_TEST.
