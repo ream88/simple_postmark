@@ -6,7 +6,7 @@ Gem::Specification.new do |gem|
   gem.version       = SimplePostmark::VERSION
   gem.authors       = 'Mario Uher'
   gem.email         = 'uher.mario@gmail.com'
-  gem.description   = 'SimplePostmark makes it easy to send mails via Postmark™ using Rails 3\'s ActionMailer.'
+  gem.description   = 'SimplePostmark makes it easy to send mails via Postmark™ using Rails\'s ActionMailer.'
   gem.summary       = 'A simple way to use Postmark™ with your Rails app.'
   gem.homepage      = 'http://haihappen.github.com/simple_postmark'
 

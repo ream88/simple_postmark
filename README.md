@@ -1,12 +1,12 @@
 # simple_postmark [![Build Status](https://travis-ci.org/haihappen/simple_postmark.png)](https://travis-ci.org/haihappen/simple_postmark)
 
-SimplePostmark makes it easy to send mails via [Postmark](http://postmarkapp.com)™ using Rails 3's ActionMailer.
-SimplePostmark is inspired by [postmark-gem](https://github.com/wildbit/postmark-gem), but unfortunately postmark-gem forced to me to use non-standard Rails calls like `postmark_attachments`. SimplePostmark uses the standard Rails 3's ActionMailer syntax to send your emails via Postmark.
+SimplePostmark makes it easy to send mails via [Postmark](http://postmarkapp.com)™ using Rails's ActionMailer.
+SimplePostmark is inspired by [postmark-gem](https://github.com/wildbit/postmark-gem), but unfortunately postmark-gem forced to me to use non-standard Rails calls like `postmark_attachments`. SimplePostmark uses the standard Rails's ActionMailer syntax to send your emails via Postmark.
 
 Tested against Ruby versions `1.9.2`, `1.9.3` and Rails versions `3.0.x`, `3.1.x`, `3.2.x`.
-`ruby-head` and `2.0` and Rails `master` should work too btw.
+`ruby-head`, `2.0` and Rails `master` should work too btw.
 
-If you are still using Ruby `1.8.7` or `Ruby Enterprise Edition` with Rails 3, you can use the backported version of this gem called [simple_postmark18](https://github.com/haihappen/simple_postmark/tree/ruby18).
+If you are still using Ruby `1.8.7` or `Ruby Enterprise Edition` with Rails, you can use the backported version of this gem called [simple_postmark18](https://github.com/haihappen/simple_postmark/tree/ruby18).
 
 ## Installation
 
@@ -27,7 +27,7 @@ config.action_mailer.simple_postmark_settings = { api_key: '********-****-****-*
 
 ## Usage
 
-Just use your standard Rails 3 Mailer:
+Just use your standard Rails Mailer:
 
 ```ruby
 class NotificationMailer < ActionMailer::Base
