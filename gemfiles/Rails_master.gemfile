@@ -1,7 +1,6 @@
 source :rubygems
 
 gem 'activesupport', github: 'rails/rails'
-gem 'activerecord-deprecated_finders', github: 'rails/activerecord-deprecated_finders'
 gem 'httparty'
 gem 'json'
 gem 'mail'
