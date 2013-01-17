@@ -9,11 +9,11 @@ class NotificationMailer < ActionMailer::Base
   default from: 'barney@himym.tld', to: 'ted@himym.tld'
 
   def im_your_bro
-    mail(subject: "I'm your bro!")
+    mail(subject: "I'm your bro!", body: '')
   end
 
   def im_your_bro_tagged
-    mail(subject: "I'm your bro!", tag: 'simple-postmark')
+    mail(subject: "I'm your bro!", tag: 'simple-postmark', body: '')
   end
 
   def im_your_bro_multipart
@@ -25,7 +25,7 @@ class NotificationMailer < ActionMailer::Base
 
   def the_bro_code
     attachments['thebrocode.jpg'] = File.read(File.join(File.dirname(__FILE__), 'thebrocode.jpg'))
-    mail(subject: 'The Brocode!')
+    mail(subject: 'The Brocode!', body: '')
   end
 end
 
@@ -66,7 +66,7 @@ describe ActionMailer::Base do
 
   it 'allows setting an api key' do
     ActionMailer::Base.simple_postmark_settings = { api_key: api_key }
-    
+
     ActionMailer::Base.simple_postmark_settings[:api_key].must_equal(api_key)
   end
 
@@ -79,14 +79,14 @@ describe ActionMailer::Base do
 
     it 'works' do
       NotificationMailer.im_your_bro.deliver
-      
+
       assert_requested(:post, url, headers: headers, body: merge_body)
     end
 
 
     it 'allows tags' do
       NotificationMailer.im_your_bro_tagged.deliver
-      
+
       assert_requested(:post, url, headers: headers, body: merge_body('Tag' => 'simple-postmark'))
     end
 
@@ -97,9 +97,9 @@ describe ActionMailer::Base do
         'ContentType' => 'image/jpeg',
         'Name'        => 'thebrocode.jpg'
       }
-      
+
       NotificationMailer.the_bro_code.deliver
-      
+
       assert_requested(:post, url, headers: headers, body: merge_body('Subject' => 'The Brocode!', 'Attachments' => [attachment]))
     end
 
@@ -109,9 +109,9 @@ describe ActionMailer::Base do
         'HtmlBody' => "<p>Think of me like Yoda, but instead of being little and green I wear suits and I'm awesome.<br /><br />I'm your bro-I'm Broda!</p>",
         'TextBody' => "Think of me like Yoda, but instead of being little and green I wear suits and I'm awesome. I'm your bro-I'm Broda!"
       }
-      
+
       NotificationMailer.im_your_bro_multipart.deliver
-      
+
       assert_requested(:post, url, headers: headers, body: merge_body(bodies))
     end
   end
