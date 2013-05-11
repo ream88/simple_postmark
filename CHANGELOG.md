@@ -1,3 +1,10 @@
+## 0.5.2 (May 11, 2013)
+* Some refactoring.
+* Ruby 2.0 support!
+* Rails 4.pre support! Thank you @frodsan! :)
+* Updated README.md: simple_postmark will die… someday! :(
+* Fixed some problems: #8 and #10.
+
 ## 0.5.1 (December 21, 2012)
 
 * Prepared for gem-release.
