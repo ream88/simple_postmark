@@ -20,10 +20,13 @@ branches:
 matrix:
   exclude:
     - rvm: 1.9.2
-      gemfile: gemfiles/Rails_master.gemfile
-    - rvm: 1.9.3
+      gemfile: Gemfile
+    - rvm: 1.9.2
       gemfile: gemfiles/Rails_master.gemfile
     - rvm: 1.9.2
       gemfile: gemfiles/Rails_4_0.gemfile
+    - rvm: 1.9.3
+      gemfile: gemfiles/Rails_master.gemfile
+
   allow_failures:
     - gemfile: gemfiles/Rails_master.gemfile
