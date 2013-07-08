@@ -4,7 +4,6 @@ rvm:
   - 1.9.2
   - 1.9.3
   - 2.0.0
-  - ruby-head
 
 gemfile:
   - Gemfile
@@ -22,8 +21,9 @@ matrix:
   exclude:
     - rvm: 1.9.2
       gemfile: gemfiles/Rails_master.gemfile
+    - rvm: 1.9.3
+      gemfile: gemfiles/Rails_master.gemfile
     - rvm: 1.9.2
       gemfile: gemfiles/Rails_4_0.gemfile
   allow_failures:
-    - rvm: ruby-head
     - gemfile: gemfiles/Rails_master.gemfile
