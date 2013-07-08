@@ -10,9 +10,7 @@ simple_postmark makes it easy to send mails via [Postmark](http://postmarkapp.co
 
 ---
 
-Tested against Ruby versions `1.9.2`, `1.9.3` and Rails versions `3.0.x`, `3.1.x`, `3.2.x`.
-`ruby-head`, `2.0` and Rails `master` should work too btw.
-
+Tested against Ruby versions `1.9.2`, `1.9.3`, `2.0.0` and Rails versions `3.0.x`, `3.1.x`, `3.2.x`, `4.0.0`.
 If you are still using Ruby `1.8.7` or `Ruby Enterprise Edition` with Rails, you can use the backported version of this gem called [simple_postmark18](https://github.com/haihappen/simple_postmark/tree/ruby18).
 
 ## Installation
