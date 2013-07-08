@@ -18,7 +18,7 @@ Gem::Specification.new do |gem|
   gem.add_dependency 'json'
   gem.add_dependency 'mail'
 
-  gem.add_development_dependency 'minitest', '~> 4.0'
+  gem.add_development_dependency 'minitest'
   gem.add_development_dependency 'rails', '>= 3.0'
   gem.add_development_dependency 'webmock'
 end

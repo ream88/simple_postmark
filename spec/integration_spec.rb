@@ -26,7 +26,7 @@ class IntegrationMailer < ActionMailer::Base
 
   def email_with_attachments
     attachments['thebrocode.jpg'] = File.read(File.join(File.dirname(__FILE__), 'thebrocode.jpg'))
-    
+
     mail(subject: 'SimplePostmark with Attachments') do |as|
       as.text { render(text: text) }
     end
@@ -74,13 +74,13 @@ describe 'SimplePostmark integration' do
 
     it 'is silent if raise_delivery_errors is not set' do
       ActionMailer::Base.raise_delivery_errors = false
-      
+
       IntegrationMailer.email.deliver
     end
 
 
     it 'raises a SimplePostmark::APIError containing the error from postmarkapp.com if raise_delivery_errors is set' do
-      -> { IntegrationMailer.email.deliver }.must_raise(SimplePostmark::APIError)
+      ->{ IntegrationMailer.email.deliver }.must_raise(SimplePostmark::APIError)
     end
   end
 

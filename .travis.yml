@@ -11,6 +11,7 @@ gemfile:
   - gemfiles/Rails_3_0.gemfile
   - gemfiles/Rails_3_1.gemfile
   - gemfiles/Rails_3_2.gemfile
+  - gemfiles/Rails_4_0.gemfile
   - gemfiles/Rails_master.gemfile
 
 branches:
@@ -21,6 +22,8 @@ matrix:
   exclude:
     - rvm: 1.9.2
       gemfile: gemfiles/Rails_master.gemfile
+    - rvm: 1.9.2
+      gemfile: gemfiles/Rails_4_0.gemfile
   allow_failures:
     - rvm: ruby-head
     - gemfile: gemfiles/Rails_master.gemfile
