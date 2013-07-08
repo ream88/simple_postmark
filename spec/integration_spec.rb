@@ -90,13 +90,12 @@ describe 'SimplePostmark integration' do
       ActionMailer::Base.simple_postmark_settings = { api_key: 'POSTMARK_API_TEST', return_response: true }
     end
 
-
     it 'returns the response from postmarkapp.com' do
       response = IntegrationMailer.email.deliver!.parsed_response
-      
+
       response['To'].must_equal('ted@himym.tld')
       response['Message'].must_equal('Test job accepted')
       response['MessageID'].wont_be_empty
     end
   end
-end if ENV['SIMPLE_POSTMARK_INTEGRATION_SPEC']
+end
