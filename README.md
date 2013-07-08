@@ -2,16 +2,22 @@
 
 simple_postmark makes it easy to send mails via [Postmark](http://postmarkapp.com)™ using Rails's ActionMailer.
 
-~~simple_postmark is inspired by [postmark-gem](https://github.com/wildbit/postmark-gem), but unfortunately postmark-gem forced to me to use non-standard Rails calls like `postmark_attachments`. simple_postmark uses the standard Rails's ActionMailer syntax to send your emails via Postmark.~~
+## Table of Contents
 
----
+* [About](#about)
+* [Installation](#installation)
+* [Usage](#usage)
+* [Configuration](#configuration)
+* [Testing](#testing)
+* [Contributing](#contributing)
+* [Copyright](#copyright)
 
-**Update:** It seems that the [issue](https://github.com/wildbit/postmark-rails/issues/17#issuecomment-13761405) was fixed in the `0.9.19` version of the [postmark gem](https://github.com/wildbit/postmark-gem), which marks this gem as obligatory. However I have not decided what to do, so simple_postmark will still be there for a while. At least until Rails `4.0` is released.
+## About
 
----
+simple_postmark was created because of the lack of the proper Rails API support in the official [postmark-gem](https://github.com/wildbit/postmark-gem). This was back in 2011, the postmark-gem was [updated](https://github.com/wildbit/postmark-rails/issues/17#issuecomment-13761405) to support the Rails API since then. I recently decided to deprecate this gem in favor of the official gem. However, this gem will continue to support all Rails versions until `5.0`.
 
 Tested against Ruby versions `1.9.2`, `1.9.3`, `2.0.0` and Rails versions `3.0.x`, `3.1.x`, `3.2.x`, `4.0.0`.
-If you are still using Ruby `1.8.7` or `Ruby Enterprise Edition` with Rails, you can use the backported version of this gem called [simple_postmark18](https://github.com/haihappen/simple_postmark/tree/ruby18).
+If you are still using Ruby `1.8.7` or `Ruby Enterprise Edition` with Rails, you can use the back-ported version of this gem called [simple_postmark18](https://github.com/haihappen/simple_postmark/tree/ruby18).
 
 ## Installation
 
@@ -58,7 +64,7 @@ class NotificationMailer < ActionMailer::Base
 end
 ```
 
-## Advanced Configuration
+## Configuration
 
 * `api_key`: Your Postmark API key. Go to [your Rack](https://postmarkapp.com/servers),
 selected the one you want to use and then go to the **Credentials** tab to find your API key.
