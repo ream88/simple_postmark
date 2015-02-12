@@ -1,3 +1,10 @@
+## 0.7.0 (February 12, 2015)
+* Rails 4.1.
+* Replaces specs with tests. 
+
+## 0.6.0 (July 8, 2013)
+* Rails 4.0!
+
 ## 0.5.2 (May 11, 2013)
 * Some refactoring.
 * Ruby 2.0 support!
