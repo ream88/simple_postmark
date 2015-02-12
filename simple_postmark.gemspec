@@ -13,12 +13,13 @@ Gem::Specification.new do |gem|
   gem.files         = `git ls-files`.split("\n")
   gem.require_path  = 'lib'
 
-  gem.add_dependency 'activesupport', '>= 3.0'
+  gem.add_dependency 'activesupport', '>= 3.0', '< 4.2.0'
+  gem.add_dependency 'actionmailer',  '>= 3.0', '< 4.2.0'
   gem.add_dependency 'httparty'
   gem.add_dependency 'json'
   gem.add_dependency 'mail'
 
-  gem.add_development_dependency 'minitest'
-  gem.add_development_dependency 'rails', '>= 3.0'
+  gem.add_development_dependency 'minitest', '>= 4.0', '< 5.0'
+  gem.add_development_dependency 'rake'
   gem.add_development_dependency 'webmock'
 end
