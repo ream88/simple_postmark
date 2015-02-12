@@ -1,6 +1,7 @@
 require_relative 'test_helper'
 
-class SimplePostmarkTest < MiniTest::Unit::TestCase
+
+class SimplePostmarkTest < Minitest::Test
   def test_responds_to_deliver!
     assert_respond_to Mail::SimplePostmark.new, :deliver!
   end

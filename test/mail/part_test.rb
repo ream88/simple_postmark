@@ -1,6 +1,6 @@
 require_relative '../test_helper'
 
-class Mail::PartTest < MiniTest::Unit::TestCase
+class Mail::PartTest < Minitest::Test
   def test_responds_to_to_postmark
     assert_respond_to Mail::Part.new, :to_postmark
   end

@@ -1,7 +1,7 @@
 require_relative '../test_helper'
 
 
-class IntegrationTest < MiniTest::Unit::TestCase
+class IntegrationTest < Minitest::Test
   URL = 'http://api.postmarkapp.com/email'
   API_KEY = '********-****-****-****-************'
 
@@ -41,7 +41,7 @@ class IntegrationTest < MiniTest::Unit::TestCase
 
   def test_send_email
     stub_request :post, URL
-    TestMailer.email.deliver
+    TestMailer.email.deliver_now
 
     assert_requested :post, URL, headers: HEADERS, body: BODY.to_json
   end
@@ -49,7 +49,7 @@ class IntegrationTest < MiniTest::Unit::TestCase
 
   def test_send_email_with_tags
     stub_request :post, URL
-    TestMailer.email_with_tags.deliver
+    TestMailer.email_with_tags.deliver_now
 
     assert_requested :post, URL, headers: HEADERS, body: Hash[BODY.merge('Tag' => 'simple-postmark').sort].to_json
   end
@@ -63,7 +63,7 @@ class IntegrationTest < MiniTest::Unit::TestCase
     }
 
     stub_request :post, URL
-    TestMailer.email_with_attachments.deliver
+    TestMailer.email_with_attachments.deliver_now
 
     assert_requested :post, URL, headers: HEADERS, body: Hash[BODY.merge('Subject' => %{The Brocode!}, 'Attachments' => [attachment]).sort].to_json
   end
@@ -76,7 +76,7 @@ class IntegrationTest < MiniTest::Unit::TestCase
     }
 
     stub_request :post, URL
-    TestMailer.email_with_multipart.deliver
+    TestMailer.email_with_multipart.deliver_now
 
     assert_requested :post, URL, headers: HEADERS, body: Hash[BODY.merge(multipart).sort].to_json
   end
